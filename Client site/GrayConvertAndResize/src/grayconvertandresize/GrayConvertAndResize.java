@@ -30,13 +30,12 @@ public class GrayConvertAndResize {
     IplImage sourceImage; // this image is the source Ipl image given at the instantiation.
     private String imgPath = ""; // this imgPath is for testing purpose only.
     // On the final version this variable will be omitted.
-    int width; // width of the new image
-    int height; // hight of the new image
+    private int width = 125; // width of the new image
+    
+    private int height = 150; // hight of the new image
 
     private GrayConvertAndResize() {
         imgPath = "http://www.wonderslist.com/wp-content/uploads/2015/06/Paradisiacal-Kashmir-Valley.jpg";
-        width = 150;
-        height = 125;
         BufferedImage img;
         try {
             img = ImageIO.read(new URL(imgPath));
@@ -45,17 +44,12 @@ public class GrayConvertAndResize {
         }
     }
 
+    /**
+     * initialize with an ipl image
+     * @param img 
+     */
     public GrayConvertAndResize(IplImage img) {
         imgPath = null;
-        width = 150;
-        height = 125;
-        sourceImage = img;
-    }
-
-    public GrayConvertAndResize(IplImage img, int width, int height) {
-        imgPath = null;
-        this.width = width;
-        this.height = height;
         sourceImage = img;
     }
 
@@ -73,31 +67,17 @@ public class GrayConvertAndResize {
         return iplImage;
     }
 
-    private BufferedImage grayScale(BufferedImage bufImage) {
-        BufferedImage retImage = bufImage;
-        try {
-            int widths = bufImage.getWidth();
-            int heights = bufImage.getHeight();
-
-            for (int i = 0; i < heights; i++) {
-
-                for (int j = 0; j < widths; j++) {
-
-                    Color c = new Color(bufImage.getRGB(j, i));
-                    int red = (int) (c.getRed() * 0.299);
-                    int green = (int) (c.getGreen() * 0.587);
-                    int blue = (int) (c.getBlue() * 0.114);
-                    Color newColor = new Color(red + green + blue,
-                            red + green + blue, red + green + blue);
-
-                    retImage.setRGB(j, i, newColor.getRGB());
-                }
-            }
-
-        } catch (Exception e) {
-            return null;
-        }
-        return retImage;
+    /**
+     * It performs gray scale conversion of 8 bit
+     * @param inputImage
+     * @return 
+     */
+    private BufferedImage grayScale(BufferedImage inputImage) {
+        BufferedImage img = new BufferedImage(inputImage.getWidth(), inputImage.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+        Graphics g = img.getGraphics();
+        g.drawImage(inputImage, 0, 0, null);
+        g.dispose();
+        return img;
     }
 
     private IplImage resizeImage() {
