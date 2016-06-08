@@ -9,3 +9,15 @@
 /Client site/AvailableDevices/dist/
 /Server/JavaFaces/trainingImages/JavaFaces/build
 /Server/JavaFaces/dist/
+/Client site/FacesOnly/nbproject/private/
+/Client site/FacesOnly/build/
+/Client site/FrameReturner/nbproject/private/
+/Client site/FrameReturner/build/
+/Client site/FrameReturner/dist/
+/Server/RecognizeFaces/TrainImage/nbproject/private/
+/Server/RecognizeFaces/TrainAndRecognizeImage/nbproject/private/
+/Server/RecognizeFaces/TrainAndRecognizeImage/build/
+/Server/RecognizeFaces/TrainAndRecognizeImage/dist/
+/Server/TrainAndRecognizeImage/build/
+/Server/TrainAndRecognizeImage/dist/
+/Server/TrainAndRecognizeImage/nbproject/private/
