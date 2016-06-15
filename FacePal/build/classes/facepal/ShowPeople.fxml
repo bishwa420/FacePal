@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="showPeople" prefHeight="509.0" prefWidth="716.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facepal.ShowPeopleController">
+   <children>
+      <Button fx:id="button" layoutX="178.0" layoutY="2.0" mnemonicParsing="false" onAction="#addgrid" opacity="0.0" prefHeight="25.0" prefWidth="99.0" text="Show List" />
+      <Label alignment="CENTER" layoutX="553.0" layoutY="35.0" prefHeight="27.0" prefWidth="155.0" text="** Uncheck to remove" textFill="#f58873">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <TableView id="tableView" fx:id="tableView" layoutX="172.0" layoutY="62.0" prefHeight="398.0" prefWidth="530.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="62.0">
+        <columns>
+          <TableColumn fx:id="checkId" prefWidth="15.0" styleClass="checker" text="Check" />
+          <TableColumn fx:id="name" prefWidth="260.0" styleClass="name" text="Name" />
+            <TableColumn fx:id="image" prefWidth="170.0" text="Image" />
+        </columns>
+      </TableView>
+      
+        <AnchorPane layoutY="8.0" prefHeight="500.0" prefWidth="162.0">
+         <children>
+            <Button id="menubutton" layoutX="19.0" layoutY="111.0" mnemonicParsing="false" onAction="#homeAction" prefHeight="42.0" prefWidth="123.0" text="Home" textFill="#e4dbdb">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button id="menubutton" layoutX="19.0" layoutY="176.0" mnemonicParsing="false" onAction="#addAction" prefHeight="42.0" prefWidth="123.0" text="Add Person" textFill="#fcf0f0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button id="menubutton" layoutX="19.0" layoutY="365.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="42.0" prefWidth="123.0" text="Logout" textFill="#f5eeee" />
+            <Button id="menubutton" layoutX="19.0" layoutY="304.0" mnemonicParsing="false" onAction="#settingsAction" prefHeight="42.0" prefWidth="123.0" text="Settings" textFill="#ebe0e0" />
+            <Button id="menubutton" layoutX="20.0" layoutY="237.0" mnemonicParsing="false" onAction="#showAction" prefHeight="42.0" prefWidth="123.0" text="Show people" textFill="#ebe7e7">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="271.0" layoutY="2.0" prefHeight="53.0" prefWidth="234.0" text="List of Persons" textFill="#e8bdbd">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

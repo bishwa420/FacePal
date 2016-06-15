@@ -1,0 +1,37 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 9, 2016, 2:18:28 AM
+    Author     : Tapos
+*/
+#menubutton{
+    -fx-padding: 8 10 10 10;
+/*    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;*/
+    -fx-background-radius: 8;
+    -fx-cursor:hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.3em;
+    -fx-background-color:transparent ;
+    -fx-border-color:black;
+    -fx-border-radius:15; 
+    -fx-box-shadow: 10px 10px 5px #888888;
+}
+
+#settings,#home{
+    -fx-background-image: url("light_blue.jpg");
+}
+#savebutton, #resetbutton{
+    -fx-padding: 8 10 10 10;
+/*    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;*/
+    -fx-background-radius: 8;
+    -fx-cursor:hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.3em;
+    -fx-background-color:transparent ;
+    -fx-border-color:black;
+    -fx-border-radius:15;
+  
+}

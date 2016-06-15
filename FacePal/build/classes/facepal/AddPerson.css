@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 9, 2016, 12:58:03 AM
+    Author     : Tapos
+*/
+
+#PersonAnchorPane{
+      -fx-background-image: url("light_blue.jpg");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 900 506;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+#personSubmit{
+    -fx-padding: 8 10 10 10;
+/*    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;*/
+    -fx-background-radius: 8;
+    -fx-cursor:hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.3em;
+    -fx-background-color:transparent ;
+    -fx-border-color:black;
+    -fx-border-radius:15;
+  
+}
+
+#menubutton{
+    -fx-padding: 8 10 10 10;
+/*    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;*/
+    -fx-background-radius: 8;
+    -fx-cursor:hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.3em;
+    -fx-background-color:transparent ;
+    -fx-border-color:black;
+    -fx-border-radius:15;
+    
+    
+}
+
