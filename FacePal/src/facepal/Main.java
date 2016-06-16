@@ -30,12 +30,15 @@ public class Main extends Application {
     public static String screen4file = "ShowPeople.fxml";
     public static String screen5ID = "Settings";
     public static String screen5file = "Settings.fxml";
+    public static String screen2ID = "Home";
+    public static String screen2file = "Home.fxml";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         ScreenController mainContainer = new ScreenController();
          mainContainer.loadScreen(Main.screen1ID, Main.screen1file);
+         mainContainer.loadScreen(Main.screen2ID, Main.screen2file);
          mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
          mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
          mainContainer.loadScreen(Main.screen5ID, Main.screen5file);

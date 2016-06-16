@@ -96,4 +96,7 @@ and open the template in the editor.
 #settings,#home{
     -fx-background-image: url("light_blue.jpg");
 }
+#primarycameracombobox,#secondarycameracombobox{
+    
+}
 

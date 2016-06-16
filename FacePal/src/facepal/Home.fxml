@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="home" prefHeight="508.0" prefWidth="719.0" stylesheets="@AddPerson.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facepal.HomeController">
+   <children>
+      <Label fx:id="welcomeUserLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" prefHeight="58.0" prefWidth="500.0" text="Welcome 'User's name'">
+         <textFill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#9cd7dd" />
+                  <Stop color="#9cd5db" offset="0.5567010309278351" />
+                  <Stop color="#9cd5db" offset="0.6563573883161511" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="195.0" layoutY="66.0" prefHeight="35.0" prefWidth="189.0" text="Primary camera" textFill="#f2ebeb">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="453.0" layoutY="66.0" prefHeight="35.0" prefWidth="215.0" text="Secondary camera" textFill="#e8d9d9">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <ComboBox id="primarycameracombobox" fx:id="cbCameraOptions" layoutX="228.0" layoutY="107.0" prefWidth="150.0" promptText="No camera chosen" visibleRowCount="5" />
+      <ComboBox id="secondarycameracombobox" fx:id="secondaryCameraComboBox" layoutX="518.0" layoutY="107.0" prefWidth="150.0" promptText="No camera chosen" visibleRowCount="5" />
+      <Button id="startmonitoringbutton" fx:id="startMonitoringButton" layoutX="303.0" layoutY="144.0" mnemonicParsing="false" onAction="#startAction" prefHeight="43.0" prefWidth="150.0" text="Start monitoring" />
+      <Button id="stopmonitoringbutton" fx:id="stopMonitoringButton" alignment="CENTER" layoutX="469.0" layoutY="144.0" mnemonicParsing="false" onAction="#stopAction" prefHeight="43.0" prefWidth="150.0" stylesheets="@Login.css" text="Stop monitoring" />
+   <AnchorPane layoutY="8.0" prefHeight="500.0" prefWidth="162.0">
+         <children>
+            <Button id="menubutton" layoutX="19.0" layoutY="111.0" mnemonicParsing="false" onAction="#homeAction" prefHeight="42.0" prefWidth="123.0" text="Home" textFill="#e4dbdb">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button id="menubutton" layoutX="19.0" layoutY="176.0" mnemonicParsing="false" onAction="#addAction" prefHeight="42.0" prefWidth="123.0" text="Add Person" textFill="#fcf0f0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button id="menubutton" layoutX="19.0" layoutY="365.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="42.0" prefWidth="123.0" text="Logout" textFill="#f5eeee" />
+            <Button id="menubutton" layoutX="19.0" layoutY="304.0" mnemonicParsing="false" onAction="#settingsAction" prefHeight="42.0" prefWidth="123.0" text="Settings" textFill="#ebe0e0" />
+            <Button id="menubutton" layoutX="20.0" layoutY="237.0" mnemonicParsing="false" onAction="#showAction" prefHeight="42.0" prefWidth="123.0" text="Show people" textFill="#ebe7e7">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <BorderPane fx:id="bpWebCamPaneHolder" layoutX="213.0" layoutY="199.0" prefHeight="270.0" prefWidth="455.0" style="-fx-background-color: #191919;">
+         <center>
+            <ImageView fx:id="imgWebCamCapturedImage" fitHeight="215.0" fitWidth="274.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

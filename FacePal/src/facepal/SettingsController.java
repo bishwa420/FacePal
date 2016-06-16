@@ -45,7 +45,7 @@ public class SettingsController implements Initializable, ControlledScreen {
 
     @FXML
     private void homeAction(ActionEvent e) {
-
+        myController.setScreen(Main.screen2ID);
     }
 
     @FXML

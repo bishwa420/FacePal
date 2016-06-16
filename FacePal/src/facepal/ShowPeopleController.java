@@ -205,6 +205,8 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
 
             }
         }
+        
+        myController.setScreen(Main.screen2ID);
 
     }
 

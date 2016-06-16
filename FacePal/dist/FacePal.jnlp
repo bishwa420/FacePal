@@ -11,9 +11,12 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FacePal.jar" size="275501" download="eager" />
+    <jar href="FacePal.jar" size="286456" download="eager" />
+    <jar href="lib/bridj-0.6.3-20130316.190111-13.jar" size="893456" download="eager" />
     <jar href="lib/commons-codec-1.5.jar" size="73098" download="eager" />
     <jar href="lib/mail-1.4.jar" size="388864" download="eager" />
+    <jar href="lib/slf4j-api-1.7.2.jar" size="26083" download="eager" />
+    <jar href="lib/webcam-capture-0.3.10-RC7.jar" size="405753" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="FacePal" >
     <param name="requiredFXVersion" value="2.2+"/>

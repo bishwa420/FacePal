@@ -223,7 +223,7 @@ public class AddPersonController implements Initializable, ControlledScreen {
     
     @FXML
     private void homeAction(ActionEvent e){
-        
+       myController.setScreen(Main.screen2ID); 
     }
     @FXML
     private void addAction(ActionEvent e){

@@ -96,7 +96,8 @@ public class WelcomeController implements Initializable, ControlledScreen {
                 dialog.setMessage("Successfully registered.");
                 dialog.showDialog();
                 
-              // checnge scene to home page
+              // change scene to home page
+                  myController.setScreen(Main.screen2ID);
 
             }
             }catch(Exception ex){
@@ -157,7 +158,7 @@ public class WelcomeController implements Initializable, ControlledScreen {
                  adminId = (long) localReceive[2];
                  adminName = (String) localReceive[3]; 
                  
-                 myController.setScreen(Main.screen3ID);
+                 myController.setScreen(Main.screen2ID);
                  //scene change to home 
                 
             }
