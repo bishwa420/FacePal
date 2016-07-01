@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FacePal.jar" size="286456" download="eager" />
+    <jar href="FacePal.jar" size="297012" download="eager" />
     <jar href="lib/bridj-0.6.3-20130316.190111-13.jar" size="893456" download="eager" />
     <jar href="lib/commons-codec-1.5.jar" size="73098" download="eager" />
     <jar href="lib/mail-1.4.jar" size="388864" download="eager" />

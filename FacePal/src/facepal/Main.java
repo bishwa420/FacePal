@@ -24,7 +24,7 @@ public class Main extends Application {
 
     public static String screen1ID = "Welcome";
     public static String screen1file = "Welcome.fxml";
-     public static String screen3ID = "AddPerson";
+    public static String screen3ID = "AddPerson";
     public static String screen3file = "AddPerson.fxml";
     public static String screen4ID = "PeopleList";
     public static String screen4file = "ShowPeople.fxml";
@@ -32,26 +32,27 @@ public class Main extends Application {
     public static String screen5file = "Settings.fxml";
     public static String screen2ID = "Home";
     public static String screen2file = "Home.fxml";
+    public static String screen6ID = "RecoveryPassword";
+    public static String screen6file = "RecoveryPassword.fxml";
+
+    public static ScreenController mainContainer;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        ScreenController mainContainer = new ScreenController();
-         mainContainer.loadScreen(Main.screen1ID, Main.screen1file);
-         mainContainer.loadScreen(Main.screen2ID, Main.screen2file);
-         mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
-         mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
-         mainContainer.loadScreen(Main.screen5ID, Main.screen5file);
-
+        mainContainer = new ScreenController();
+        mainContainer.loadScreen(Main.screen1ID, Main.screen1file);
+        
+//         mainContainer.loadScreen(Main.screen6ID, Main.screen6file);
+//         mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
+//         mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
+//         mainContainer.loadScreen(Main.screen5ID, Main.screen5file);
         mainContainer.setScreen(Main.screen1ID);
 
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
 
         Scene scene = new Scene(root);
-      
-            
-           
 
         primaryStage.setMaxWidth(715);
         primaryStage.setHeight(505);
@@ -60,7 +61,7 @@ public class Main extends Application {
         primaryStage.setTitle("FacePal");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-       // primaryStage.initStyle(StageStyle.UNDECORATED);
+        // primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
 
     }

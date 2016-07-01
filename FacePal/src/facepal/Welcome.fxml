@@ -10,22 +10,22 @@
 
 <AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="712.0" stylesheets="@Welcome.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facepal.WelcomeController">
    <children>
-      <TextField fx:id="logInUsername" layoutX="248.0" layoutY="42.0" prefHeight="25.0" prefWidth="156.0" promptText="Username">
+      <TextField fx:id="logInUsername" layoutX="246.0" layoutY="43.0" prefHeight="30.0" prefWidth="167.0" promptText="Username" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="logInPassword" layoutX="430.0" layoutY="42.0" prefHeight="25.0" prefWidth="156.0" promptText="Password">
+      <PasswordField fx:id="logInPassword" layoutX="416.0" layoutY="43.0" prefHeight="30.0" prefWidth="177.0" promptText="Password" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <Button id="login" layoutX="606.0" layoutY="42.0" mnemonicParsing="false" onAction="#logInAction" prefHeight="25.0" prefWidth="76.0" text="LogIn ">
+      <Button id="login" layoutX="606.0" layoutY="43.0" mnemonicParsing="false" onAction="#logInAction" prefHeight="25.0" prefWidth="76.0" text="LogIn " textFill="#ffe3e3">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label alignment="CENTER_RIGHT" layoutX="110.0" layoutY="41.0" prefHeight="31.0" prefWidth="119.0" text="Login  here" textFill="#dab5b5">
+      <Label alignment="CENTER_RIGHT" layoutX="119.0" layoutY="43.0" prefHeight="31.0" prefWidth="119.0" text="Login  here" textFill="#dab5b5">
          <font>
             <Font name="System Bold Italic" size="21.0" />
          </font>
@@ -35,32 +35,32 @@
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="signUpName" layoutX="430.0" layoutY="188.0" prefHeight="25.0" prefWidth="252.0" promptText="Name">
+      <TextField fx:id="signUpName" layoutX="430.0" layoutY="188.0" prefHeight="25.0" prefWidth="252.0" promptText="Name" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="signUpEmail" layoutX="430.0" layoutY="231.0" prefHeight="25.0" prefWidth="252.0" promptText="Email">
+      <TextField fx:id="signUpEmail" layoutX="430.0" layoutY="231.0" prefHeight="25.0" prefWidth="252.0" promptText="Email" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="signUpPassword" layoutX="430.0" layoutY="310.0" prefHeight="25.0" prefWidth="252.0" promptText="Password">
+      <PasswordField fx:id="signUpPassword" layoutX="430.0" layoutY="310.0" prefHeight="25.0" prefWidth="252.0" promptText="Password" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <PasswordField fx:id="signUpConfirmPassword" layoutX="430.0" layoutY="352.0" prefHeight="25.0" prefWidth="252.0" promptText="Confirm password">
+      <PasswordField fx:id="signUpConfirmPassword" layoutX="430.0" layoutY="352.0" prefHeight="25.0" prefWidth="252.0" promptText="Confirm password" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <Button id="signup" layoutX="483.0" layoutY="410.0" mnemonicParsing="false" onAction="#signUpAction" prefHeight="39.0" prefWidth="96.0" text="Sign Up">
+      <Button id="signup" layoutX="483.0" layoutY="410.0" mnemonicParsing="false" onAction="#signUpAction" prefHeight="39.0" prefWidth="96.0" text="Sign Up" textFill="#e1cece">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button id="reset" layoutX="593.0" layoutY="410.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="39.0" prefWidth="89.0" text="Reset">
+      <Button id="reset" layoutX="593.0" layoutY="410.0" mnemonicParsing="false" onAction="#resetAction" prefHeight="39.0" prefWidth="89.0" text="Reset" textFill="#f2dcdc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -83,10 +83,15 @@
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="signUpUsername" layoutX="430.0" layoutY="271.0" prefHeight="25.0" prefWidth="252.0" promptText="Username">
+      <TextField fx:id="signUpUsername" layoutX="430.0" layoutY="271.0" prefHeight="25.0" prefWidth="252.0" promptText="Username" styleClass="field">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
+      <Button id="forgotPass" alignment="CENTER_RIGHT" layoutX="556.0" layoutY="82.0" mnemonicParsing="false" onAction="#forgotAction" prefHeight="21.0" prefWidth="137.0" text="forgot password ?" textAlignment="RIGHT" textFill="#f5eded" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

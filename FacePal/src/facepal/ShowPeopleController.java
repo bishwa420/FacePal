@@ -254,6 +254,7 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
 
             }
         }
+        HomeController.cameraDispose();
         myController.setScreen(Main.screen1ID);
         WelcomeController.logIn.setText("");
     }

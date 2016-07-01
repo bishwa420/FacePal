@@ -36,26 +36,28 @@ public class HomeController implements Initializable, ControlledScreen {
     ComboBox<WebCamInfo> cbCameraOptions;
     @FXML
     ImageView imgWebCamCapturedImage;
-    @FXML BorderPane bpWebCamPaneHolder;
     @FXML
-    private Button startMonitoringButton;
+    BorderPane bpWebCamPaneHolder;
     @FXML
-    private Button stopMonitoringButton;
+    private  Button startMonitoringButton;
     @FXML
-     ComboBox<WebCamInfo> secondaryCameraComboBox;
+    private  Button stopMonitoringButton;
+    @FXML
+    ComboBox<WebCamInfo> secondaryCameraComboBox;
     
-    private boolean stopCamera = false;
-    private int secondaryCameraId=-1;
-    private boolean doorOpen=true; 
+    public static Button start;
+    public static Button stop;
+    private static boolean stopCamera = false;
+    private int secondaryCameraId = -1;
+    private boolean doorOpen = true;
 
     private BufferedImage grabbedImage;
 //	private WebcamPanel selWebCamPanel = null;
-    private Webcam selWebCam = null;
+    private static  Webcam selWebCam = null;
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
 
     private String cameraListPromptText = "Choose Camera";
-    private Button doorButton=new Button();
-  
+    private Button doorButton = new Button();
 
     String primaryCameraChosen = null, secondaryCameraChosen = null;
 
@@ -70,6 +72,9 @@ public class HomeController implements Initializable, ControlledScreen {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         
+        start=startMonitoringButton;
+        stop=stopMonitoringButton;
+
         ObservableList<WebCamInfo> options = FXCollections.observableArrayList();
         int webCamCounter = 0;
         for (Webcam webcam : Webcam.getWebcams()) {
@@ -82,15 +87,13 @@ public class HomeController implements Initializable, ControlledScreen {
         cbCameraOptions.setItems(options);
         secondaryCameraComboBox.setItems(options);
         cbCameraOptions.setPromptText(cameraListPromptText);
-        
-        
-        
-           secondaryCameraComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<WebCamInfo>() {
+
+        secondaryCameraComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<WebCamInfo>() {
 
             @Override
             public void changed(ObservableValue<? extends WebCamInfo> arg0, WebCamInfo arg1, WebCamInfo arg2) {
                 if (arg2 != null) {
-                    secondaryCameraId=arg2.getWebCamIndex();
+                    secondaryCameraId = arg2.getWebCamIndex();
                     System.out.println("WebCam Index: " + arg2.getWebCamIndex() + ": WebCam Name:" + arg2.getWebCamName());
                     //initializeWebCam(arg2.getWebCamIndex());
 //                     if(doorOpen==true){
@@ -100,8 +103,7 @@ public class HomeController implements Initializable, ControlledScreen {
                 }
             }
         });
-           
-           
+
         cbCameraOptions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<WebCamInfo>() {
 
             @Override
@@ -113,9 +115,6 @@ public class HomeController implements Initializable, ControlledScreen {
                 }
             }
         });
-        
-      
-        
 
         Platform.runLater(new Runnable() {
 
@@ -126,8 +125,7 @@ public class HomeController implements Initializable, ControlledScreen {
 
             }
         });
-        
-        
+
 //     //jokhon dorja khula er jonno request jabe tokhon secondary camera show korbe abar bondho hoye gele primary te fire jabe 
 //    if(doorOpen==true){
 //        closeCamera();
@@ -136,15 +134,14 @@ public class HomeController implements Initializable, ControlledScreen {
 //    else if(doorOpen==false){
 //        //primary camera abar start hobe 
 //    }
-        
     }
-    
-    
 
     protected void setImageViewSize() {
 
-        double height = bpWebCamPaneHolder.getHeight();
-        double width = bpWebCamPaneHolder.getWidth();
+       // double height = bpWebCamPaneHolder.getHeight();
+        //double width = bpWebCamPaneHolder.getWidth();
+        double height =270.0;
+        double width=460.0;
         imgWebCamCapturedImage.setFitHeight(height);
         imgWebCamCapturedImage.setFitWidth(width);
         imgWebCamCapturedImage.prefHeight(height);
@@ -223,25 +220,37 @@ public class HomeController implements Initializable, ControlledScreen {
 
     }
 
-    private void closeCamera() {
-        if (selWebCam != null) {
-            selWebCam.close();
+    private static void closeCamera() {
+        try {
+            if (selWebCam != null) {
+                selWebCam.close();
+            }
+        } catch (Exception e) {
+
         }
     }
-    
-    public void startAction(ActionEvent event)
-	{
-		stopCamera = false;
-		startWebCamStream();
-		startMonitoringButton.setDisable(true);
-		stopMonitoringButton.setDisable(false);
-	}
-    
-    public void stopAction(ActionEvent event){
-        
+
+    public void startAction(ActionEvent event) {
+        stopCamera = false;
+        startWebCamStream();
+        startMonitoringButton.setDisable(true);
+        stopMonitoringButton.setDisable(false);
+    }
+
+    public void stopAction(ActionEvent event) {
+
         stopCamera = true;
-		startMonitoringButton.setDisable(false);
-		stopMonitoringButton.setDisable(true);
+        startMonitoringButton.setDisable(false);
+        stopMonitoringButton.setDisable(true);
+    }
+
+    public static void cameraDispose() {
+
+        stopCamera = true;
+        start.setDisable(false);
+        stop.setDisable(true);
+        closeCamera();
+        //Webcam.shutdown();
     }
 
     class WebCamInfo {
@@ -271,33 +280,36 @@ public class HomeController implements Initializable, ControlledScreen {
         }
 
     }
-    
-    
+
     @FXML
-    private void homeAction(ActionEvent e){
+    private void homeAction(ActionEvent e) {
         myController.setScreen(Main.screen2ID);
     }
+
     @FXML
-    private void addAction(ActionEvent e){
+    private void addAction(ActionEvent e) {
         myController.setScreen(Main.screen3ID);
     }
+
     @FXML
-    private void showAction(ActionEvent e){
+    private void showAction(ActionEvent e) {
         myController.setScreen(Main.screen4ID);
-       ShowPeopleController.trigger.setDisable(false);
-       ShowPeopleController.trigger.fire();
-      
+        ShowPeopleController.trigger.setDisable(false);
+        ShowPeopleController.trigger.fire();
+
     }
+
     @FXML
-    private void settingsAction(ActionEvent e){
+    private void settingsAction(ActionEvent e) {
         myController.setScreen(Main.screen5ID);
     }
+
     @FXML
-    private void logoutAction(ActionEvent e){
+    private void logoutAction(ActionEvent e) {
+        cameraDispose();
         myController.setScreen(Main.screen1ID);
+
         WelcomeController.logIn.setText("");
     }
-    
-  
 
 }

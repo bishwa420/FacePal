@@ -67,6 +67,7 @@ public class SettingsController implements Initializable, ControlledScreen {
 
     @FXML
     private void logoutAction(ActionEvent e) {
+        HomeController.cameraDispose();
         myController.setScreen(Main.screen1ID);
         WelcomeController.logIn.setText("");
     }

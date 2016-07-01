@@ -5,6 +5,7 @@
  */
 package facepal;
 
+import static facepal.Main.mainContainer;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -45,6 +46,14 @@ public class WelcomeController implements Initializable, ControlledScreen {
         // TODO
         logIn=logInPassword;
 
+    }
+    
+    @FXML
+    public void forgotAction(ActionEvent e){
+        mainContainer.loadScreen(Main.screen6ID, Main.screen6file);
+        
+        myController.setScreen(Main.screen6ID);
+        
     }
 
     @FXML
@@ -95,7 +104,7 @@ public class WelcomeController implements Initializable, ControlledScreen {
                 dialog.setTitleText("Info");
                 dialog.setMessage("Successfully registered.");
                 dialog.showDialog();
-                
+                loadFile();
               // change scene to home page
                   myController.setScreen(Main.screen2ID);
 
@@ -115,10 +124,17 @@ public class WelcomeController implements Initializable, ControlledScreen {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
-            ex.printStackTrace();
+           // ex.printStackTrace();
             result = false;
         }
         return result;
+    }
+    
+    public void loadFile(){
+         mainContainer.loadScreen(Main.screen2ID, Main.screen2file);
+         mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
+         mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
+         mainContainer.loadScreen(Main.screen5ID, Main.screen5file);
     }
 
     @FXML
@@ -147,6 +163,8 @@ public class WelcomeController implements Initializable, ControlledScreen {
             
             CommunicateServer.callSendObject(CommunicateServer.sendObject);
             
+         
+            
             localReceive=CommunicateServer.getObject();
             
             serviceId = (int) localReceive[0];
@@ -157,7 +175,7 @@ public class WelcomeController implements Initializable, ControlledScreen {
                 
                  adminId = (long) localReceive[2];
                  adminName = (String) localReceive[3]; 
-                 
+                 loadFile();
                  myController.setScreen(Main.screen2ID);
                  //scene change to home 
                 

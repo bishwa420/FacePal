@@ -33,17 +33,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.ejb.EJB;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
-import connectiontest.Person;
 
 /**
  *
  * @author Tapos
  */
 @WebServlet(name = "MyServletPack", urlPatterns = {"/MyServletPack"})
+
 public class MyServletPack extends HttpServlet {
     
     
@@ -60,6 +61,8 @@ public class MyServletPack extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
+    
+            
     public static final String basePath="F:\\project300Backup";
     
     public Conversion conversion;
@@ -69,13 +72,18 @@ public class MyServletPack extends HttpServlet {
      private Object ob[];
      private String getImgstr;
     
-
+     
      
      
 
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+          
+          
+        
+        
 //        response.setContentType("text/html;charset=UTF-8");
 //        PrintWriter out = response.getWriter();
 //        try {
@@ -135,7 +143,11 @@ public class MyServletPack extends HttpServlet {
 
                           
                           System.out.println("Successfull" );
-                          System.out.println("Successfull 1");
+                          
+                          
+                          
+                           System.out.println("Successfull 1");
+                          
 
 			OutputStream outstr = response.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(outstr);
@@ -148,7 +160,7 @@ public class MyServletPack extends HttpServlet {
                             Logger.getLogger(MyServletPack.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -156,9 +168,9 @@ public class MyServletPack extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+//    @Override
+//    public String getServletInfo() {
+//        return "Short description";
+//    }// </editor-fold>
 
 }
