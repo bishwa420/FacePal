@@ -133,7 +133,7 @@ public class WelcomeController implements Initializable, ControlledScreen {
     public void loadFile(){
          mainContainer.loadScreen(Main.screen2ID, Main.screen2file);
          mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
-         mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
+         
          mainContainer.loadScreen(Main.screen5ID, Main.screen5file);
     }
 
@@ -160,7 +160,8 @@ public class WelcomeController implements Initializable, ControlledScreen {
             CommunicateServer.sendObject[0]=1;
             CommunicateServer.sendObject[1]=logUsername;
             CommunicateServer.sendObject[2]=logPassword;
-            
+           
+       
             CommunicateServer.callSendObject(CommunicateServer.sendObject);
             
          

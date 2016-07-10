@@ -12,7 +12,7 @@
 
 <AnchorPane id="home" prefHeight="508.0" prefWidth="719.0" stylesheets="@AddPerson.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facepal.HomeController">
    <children>
-      <Label fx:id="welcomeUserLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" prefHeight="58.0" prefWidth="500.0" text="Welcome 'User's name'">
+      <Label fx:id="welcomeUserLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="195.0" prefHeight="58.0" prefWidth="202.0" text="Welcome ">
          <textFill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -66,5 +66,20 @@
             <ImageView fx:id="imgWebCamCapturedImage" fitHeight="215.0" fitWidth="274.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
+      <Label fx:id="welcomeUsername" contentDisplay="RIGHT" layoutX="411.0" layoutY="3.0" prefHeight="53.0" prefWidth="302.0">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+         <textFill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="#9cd7dd" />
+                  <Stop color="#9cd5db" offset="0.5567010309278351" />
+                  <Stop color="#9cd5db" offset="0.6563573883161511" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package facepal;
 
 import com.github.sarxos.webcam.Webcam;
+import static facepal.Main.mainContainer;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +46,7 @@ public class HomeController implements Initializable, ControlledScreen {
     private  Button stopMonitoringButton;
     @FXML
     ComboBox<WebCamInfo> secondaryCameraComboBox;
+    @FXML Label welcomeUsername;
     
     public static Button start;
     public static Button stop;
@@ -71,7 +74,7 @@ public class HomeController implements Initializable, ControlledScreen {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        
+        welcomeUsername.setText(WelcomeController.adminName);
         start=startMonitoringButton;
         stop=stopMonitoringButton;
 
@@ -293,6 +296,7 @@ public class HomeController implements Initializable, ControlledScreen {
 
     @FXML
     private void showAction(ActionEvent e) {
+        mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
         myController.setScreen(Main.screen4ID);
         ShowPeopleController.trigger.setDisable(false);
         ShowPeopleController.trigger.fire();

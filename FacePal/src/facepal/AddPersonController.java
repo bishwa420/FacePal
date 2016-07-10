@@ -5,6 +5,7 @@
  */
 package facepal;
 
+import static facepal.Main.mainContainer;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -231,6 +232,7 @@ public class AddPersonController implements Initializable, ControlledScreen {
     }
     @FXML
     private void showAction(ActionEvent e){
+        mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
         myController.setScreen(Main.screen4ID);
        ShowPeopleController.trigger.setDisable(false);
        ShowPeopleController.trigger.fire();

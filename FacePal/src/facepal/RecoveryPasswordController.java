@@ -47,6 +47,7 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
 
     private int pinCode = 0;
     private String backupEmail = "";
+    private boolean bind=false;
 
     ScreenController myController;
 
@@ -60,7 +61,7 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
             CommunicateServer.sendObject = new Object[3];
             CommunicateServer.sendObject[0] = 7;
             CommunicateServer.sendObject[1] = email;
-
+            
             CommunicateServer.callSendObject(CommunicateServer.sendObject);
 
             Object[] receive = CommunicateServer.getObject();
@@ -72,7 +73,8 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
                 dialog.setTitleText("Info");
                 dialog.setMessage("Successfully Send.");
                 dialog.showDialog();
-
+                
+                if(bind==false){
                 submit.setDisable(false);
                 recoveryCode.setDisable(false);
                 recoveryNewPassword.setDisable(false);
@@ -80,6 +82,8 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
 
                 submit.disableProperty().bind(
                         Bindings.isEmpty(recoveryCode.textProperty()));
+                }
+                bind=true;
 
             } else {
 

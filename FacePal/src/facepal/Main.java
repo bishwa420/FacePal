@@ -34,6 +34,10 @@ public class Main extends Application {
     public static String screen2file = "Home.fxml";
     public static String screen6ID = "RecoveryPassword";
     public static String screen6file = "RecoveryPassword.fxml";
+     public static String screen7ID = "Loading";
+    public static String screen7file = "Loading.fxml";
+    
+
 
     public static ScreenController mainContainer;
 
@@ -42,6 +46,7 @@ public class Main extends Application {
 
         mainContainer = new ScreenController();
         mainContainer.loadScreen(Main.screen1ID, Main.screen1file);
+        mainContainer.loadScreen(Main.screen7ID, Main.screen7file);
         
 //         mainContainer.loadScreen(Main.screen6ID, Main.screen6file);
 //         mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
@@ -52,7 +57,7 @@ public class Main extends Application {
         Group root = new Group();
         root.getChildren().addAll(mainContainer);
 
-        Scene scene = new Scene(root);
+         Scene scene = new Scene(root);
 
         primaryStage.setMaxWidth(715);
         primaryStage.setHeight(505);
@@ -63,7 +68,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         // primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
-
+       
     }
 
     /**
