@@ -77,8 +77,10 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
     private Object[] localReceive;
     private ArrayList<Long> deleteData;
     private int size = 0;
-
+    
     private List<Information> list = new ArrayList<Information>();
+    public static TableView<Information> staticTableView;
+
 
     @FXML
     TableView<Information> tableView;
@@ -113,6 +115,7 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
        CommunicateServer.callSendObject(CommunicateServer.sendObject);
 
         localReceive = CommunicateServer.getObject();
+        
         
         System.out.println("etotuk paiche");
 
@@ -261,11 +264,12 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tableView.getItems().clear();
           if(WelcomeController.adminId!=0){
                 button.fire();
           }
           
-          trigger=button;
+             trigger=button;
        
     }
 
@@ -309,6 +313,7 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
         if ((Integer) local[0] == 3 && (long) local[1] == WelcomeController.adminId && (boolean) local[2]==true) {
 
             int track = 2;
+            
              System.out.println(local.length);
              for(int i=0;i<local.length;i++)
                  System.out.println(local[i]);

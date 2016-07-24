@@ -1,0 +1,10 @@
+-->  "needed_xml.xml" file needed to detect faces 
+	and it must be putted in C drive.
+
+	path : C:\needed_xml.xml
+
+
+->   org.codebytec jar file are in javacv-1.1-bin bytec folder  
+
+
+-->  openCv version 2.4.13

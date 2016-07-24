@@ -97,8 +97,11 @@ public class WelcomeController implements Initializable, ControlledScreen {
             adminId = (long) localReceive[1];
             adminName = (String) localReceive[2];
             success  = (boolean) localReceive[3];
+            
+                System.out.println("service id "+ serviceId+" admin Id "+ adminId+ " success "+success);
 
-            if (adminId != 0 && adminName.equals("") == false && success) {
+            if(adminId != 0 && adminName.equals("") == false && success) 
+            {
                 System.out.println(serviceId +"  "+ adminId +"  "+ adminName+ " " + success);
                 DialogFX dialog = new DialogFX();
                 dialog.setTitleText("Info");
@@ -108,6 +111,14 @@ public class WelcomeController implements Initializable, ControlledScreen {
               // change scene to home page
                   myController.setScreen(Main.screen2ID);
 
+            }
+            if(success==false){
+                 DialogFX dialog = new DialogFX(DialogFX.Type.ERROR);
+                 dialog.setTitleText("Error");
+                  dialog.setMessage("signUp Failed");
+                  dialog.showDialog();
+                  //signUpPassword.setText("");
+                  
             }
             }catch(Exception ex){
                 ex.printStackTrace();
@@ -180,6 +191,13 @@ public class WelcomeController implements Initializable, ControlledScreen {
                  myController.setScreen(Main.screen2ID);
                  //scene change to home 
                 
+            }
+            else{
+                 DialogFX dialog = new DialogFX(DialogFX.Type.ERROR);
+                 dialog.setTitleText("Error");
+                  dialog.setMessage("LogIn Failed");
+                  dialog.showDialog();
+                  logInPassword.setText("");
             }
             
             

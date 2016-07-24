@@ -7,7 +7,9 @@ package facepal;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -20,9 +22,12 @@ public class LoadingController implements Initializable,ControlledScreen {
      * Initializes the controller class.
      */
     ScreenController myScreen;
+    public static Label loadingEx;
+    @FXML private Label loading;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadingEx=loading;
     }    
 
     @Override

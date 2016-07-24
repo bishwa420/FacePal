@@ -40,13 +40,14 @@ public class Main extends Application {
 
 
     public static ScreenController mainContainer;
-
+    public static String basePath="";
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+       
         mainContainer = new ScreenController();
         mainContainer.loadScreen(Main.screen1ID, Main.screen1file);
         mainContainer.loadScreen(Main.screen7ID, Main.screen7file);
+        basePath=getClass().getResource("").getPath();
         
 //         mainContainer.loadScreen(Main.screen6ID, Main.screen6file);
 //         mainContainer.loadScreen(Main.screen3ID, Main.screen3file);

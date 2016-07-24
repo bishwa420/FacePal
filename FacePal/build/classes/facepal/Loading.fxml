@@ -7,24 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="203.0" prefWidth="446.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facepal.LoadingController">
+<AnchorPane id="AnchorPaneLoading" prefHeight="164.0" prefWidth="428.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="facepal.LoadingController">
    <children>
-      <Label layoutX="134.0" layoutY="69.0" prefHeight="53.0" prefWidth="142.0" text="Loading " textFill="#ffe1e1">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="272.0" layoutY="75.0" text="." textFill="#fff8f8">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="290.0" layoutY="75.0" text="." textFill="#fffdfd">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="309.0" layoutY="75.0" text="." textFill="WHITE">
+      <Label fx:id="loading" layoutX="134.0" layoutY="49.0" prefHeight="53.0" prefWidth="158.0" text="Loading . . ." textFill="#082de4">
          <font>
             <Font size="36.0" />
          </font>

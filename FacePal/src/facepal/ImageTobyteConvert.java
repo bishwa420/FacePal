@@ -38,39 +38,41 @@ public class ImageTobyteConvert {
 //        String type = mimetype.split("/")[0];
 //           System.out.println(type);
 //        if (type.equals("image")) {
-          //  System.out.println("It's an image");
-                   System.out.println(file.getPath());
-            String imageDataString = null;
+        //  System.out.println("It's an image");
+        System.out.println(file.getPath());
+        String imageDataString = null;
 
-            // Reading a Image file from file system
-            FileInputStream imageInFile;
-            try {
+        // Reading a Image file from file system
+        FileInputStream imageInFile;
+        try {
             //Resizing image 
 
-                imageInFile = new FileInputStream(file);
-                Image image = ImageIO.read(imageInFile);
-                //resize with (X*Y) ratio
-                BufferedImage bi = this.createResizedCopy(image, 160, 120, true);
+            imageInFile = new FileInputStream(file);
+            Image image = ImageIO.read(imageInFile);
+            //resize with (X*Y) ratio
+            BufferedImage bi = this.createResizedCopy(image, 160, 120, true);
 
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                ImageIO.write(bi, "png", os);
-                InputStream is = new ByteArrayInputStream(os.toByteArray());
-                int length = is.available();
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(bi, "png", os);
+            InputStream is = new ByteArrayInputStream(os.toByteArray());
+            int length = is.available();
 
-                //converting image to byte array
-                byte imageData[] = new byte[(int) length];
+            //converting image to byte array
+            byte imageData[] = new byte[(int) length];
 
-                is.read(imageData);
+            is.read(imageData);
 
-                // Converting Image byte array into Base64 String
-                imageDataString = encodeImage(imageData);
-                imageInFile.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ImageTobyteConvert.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ImageTobyteConvert.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return imageDataString;
+            // Converting Image byte array into Base64 String
+            imageDataString = encodeImage(imageData);
+            imageInFile.close();
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ImageTobyteConvert.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageTobyteConvert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return imageDataString;
 //        } else {
 //            return "";
 //           // System.out.println("It's NOT an image");
@@ -93,6 +95,32 @@ public class ImageTobyteConvert {
         g.drawImage(originalImage, 0, 0, scaledWidth, scaledHeight, null);
         g.dispose();
         return scaledBI;
+    }
+
+    public static String convertString(BufferedImage bf) {
+        String imageString = "";
+
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bf, "png", os);
+
+            InputStream is = new ByteArrayInputStream(os.toByteArray());
+            int length = is.available();
+
+            //converting image to byte array
+            byte imageData[] = new byte[(int) length];
+
+            is.read(imageData);
+
+            // Converting Image byte array into Base64 String
+            imageString = encodeImage(imageData);
+            
+           
+        } catch (IOException ex) {
+              Logger.getLogger(ImageTobyteConvert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return imageString;
+
     }
 
 }

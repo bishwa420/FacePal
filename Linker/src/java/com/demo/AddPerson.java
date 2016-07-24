@@ -23,11 +23,13 @@ public class AddPerson {
     private long adminId = 0;
     private String name = "";
     private String[] path;
+    private String[] enhancePath;
     public PreparedStatement strt = null;
 
     private long userId;
     private ByteToImageConvert saveImage = new ByteToImageConvert();
     private String[] pathArray;
+    private String[] enhancePathArray;
     private Connection con;
     // public String path = "E:\\Study\\code\\Linker\\images";
 
@@ -35,14 +37,17 @@ public class AddPerson {
 
         userId = (Long) receive[1];
         name = (String) receive[2];
-        path = new String[10];
-
-        for (int i = 0, k = 3; i < 5; i++, k++) {
+        path = new String[5];
+        enhancePath = new String[5];
+        
+        for (int i = 0, k = 3,j=8; i < 5; i++, k++,j++) {
             path[i] = (String) receive[k];
+            enhancePath[i] = (String) receive[j];
         }
 
         pathArray = new String[5];
-
+        enhancePathArray=new String[5];
+        
         databaseUpdate();
 
         MyServletPack.responsedObject = new Object[4];
@@ -51,11 +56,11 @@ public class AddPerson {
         MyServletPack.responsedObject[1] = userId;
         MyServletPack.responsedObject[2] = true;
 
-//        JavaFaces.trainingImagePath = "E:\\Study\\code\\Linker\\images";
-//        JavaFaces.eigenCachePath = "E:\\Study\\code\\Linker\\eigenpaths";
-//        System.out.println("path is: " + path);
-//        JavaFaces.trainImage();
-//        JavaFaces.recognize()
+        JavaFaces.trainingImagePath = MyServletPack.basePath+"\\"+userId+"\\enhanced";
+        JavaFaces.eigenCachePath = MyServletPack.basePath+"\\"+userId+"\\eigencache";
+        System.out.println("path is: " + path);
+        JavaFaces.trainImage();
+        //JavaFaces.recognize();
     }
 
     private void databaseUpdate() {
@@ -89,10 +94,17 @@ public class AddPerson {
                 st.close();
 
                 for (int i = 0; i < 5; i++) {
+                    
                     if (path[i].equals("") == false) {
-                        pathArray[i] = saveImage.getImgae(userId, personId+"_", i, path[i]);
+                        
+                        pathArray[i] = saveImage.getImgae(userId, personId+"_", i, path[i],"original");
+                        enhancePathArray[i]=saveImage.getImgae(userId, personId+"_", i, enhancePath[i],"enhanced");
+                        
                     } else {
+                        
                         pathArray[i] = "";
+                        enhancePathArray[i]="";
+                        
                     }
                 }
 
@@ -106,7 +118,14 @@ public class AddPerson {
                         strt.setLong(2, personId);
                         strt.setString(3, pathArray[i]);
                         strt.executeUpdate();
-
+                        strt.close();
+                        
+                        query = "Insert into enhanced (info_id,p_id,e_path) values (?,?,?)";
+                        strt = con.prepareStatement(query);
+                        strt.setLong(1, infoId);
+                        strt.setLong(2, personId);
+                        strt.setString(3, enhancePathArray[i]);
+                        strt.executeUpdate();
                         strt.close();
 
                     }

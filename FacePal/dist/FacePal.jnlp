@@ -11,11 +11,20 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FacePal.jar" size="294365" download="eager" />
+    <jar href="FacePal.jar" size="380827" download="eager" />
     <jar href="lib/bridj-0.6.3-20130316.190111-13.jar" size="893456" download="eager" />
     <jar href="lib/commons-codec-1.5.jar" size="73098" download="eager" />
+    <jar href="lib/ffmpeg.jar" size="235624" download="eager" />
+    <jar href="lib/javacpp.jar" size="252324" download="eager" />
+    <jar href="lib/javacv.jar" size="366327" download="eager" />
     <jar href="lib/mail-1.4.jar" size="388864" download="eager" />
+    <jar href="lib/opencv-windows-x86.jar" size="7245542" download="eager" />
+    <jar href="lib/opencv-windows-x86_64.jar" size="8818573" download="eager" />
+    <jar href="lib/opencv.jar" size="616138" download="eager" />
     <jar href="lib/slf4j-api-1.7.2.jar" size="26083" download="eager" />
+    <jar href="lib/videoinput-windows-x86.jar" size="36651" download="eager" />
+    <jar href="lib/videoinput-windows-x86_64.jar" size="45014" download="eager" />
+    <jar href="lib/videoinput.jar" size="15433" download="eager" />
     <jar href="lib/webcam-capture-0.3.10-RC7.jar" size="405753" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="FacePal" >

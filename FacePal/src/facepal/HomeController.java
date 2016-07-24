@@ -1,6 +1,7 @@
 package facepal;
 
 import com.github.sarxos.webcam.Webcam;
+import facedetection.*;
 import static facepal.Main.mainContainer;
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import org.bytedeco.javacpp.opencv_core.IplImage;
 
 /**
  * FXML Controller class
@@ -32,6 +34,10 @@ import javafx.scene.layout.Pane;
  */
 public class HomeController implements Initializable, ControlledScreen {
 
+    private long timeCount = 0; //this is for checking a face repeatedly after a period
+    FaceDetection faceDetection; // this is for detecting faces
+    IplImage img[] = new IplImage[20]; // this is for saving detected faces only
+    
     ScreenController myController;
 
     @FXML
@@ -86,6 +92,7 @@ public class HomeController implements Initializable, ControlledScreen {
             webCamInfo.setWebCamName(webcam.getName());
             options.add(webCamInfo);
             webCamCounter++;
+           // System.out.println(webCamCounter);
         }
         cbCameraOptions.setItems(options);
         secondaryCameraComboBox.setItems(options);
@@ -191,7 +198,14 @@ public class HomeController implements Initializable, ControlledScreen {
                 while (!stopCamera) {
                     try {
                         if ((grabbedImage = selWebCam.getImage()) != null) {
-
+                            if(System.currentTimeMillis() - timeCount >= 2000){
+                                img = faceDetection.detectFace(grabbedImage); // contains detected faces
+                                if(img.length > 0){
+                                    //server request
+                                    System.out.println("I got faces");
+                                }
+                                timeCount = System.currentTimeMillis();
+                            }
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
@@ -298,8 +312,8 @@ public class HomeController implements Initializable, ControlledScreen {
     private void showAction(ActionEvent e) {
         mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
         myController.setScreen(Main.screen4ID);
-        ShowPeopleController.trigger.setDisable(false);
-        ShowPeopleController.trigger.fire();
+//        ShowPeopleController.trigger.setDisable(false);
+//        ShowPeopleController.trigger.fire();
 
     }
 

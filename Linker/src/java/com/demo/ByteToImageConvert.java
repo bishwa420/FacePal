@@ -19,7 +19,7 @@ import org.apache.commons.codec.binary.Base64;
 public class ByteToImageConvert {
     
     
-    public String getImgae(long userId,String name, int i,String imageDataString){
+    public String getImgae(long userId,String name, int i,String imageDataString,String destination){
         String path="";
         try {
             System.out.println("REsdkfjlskdf");
@@ -28,7 +28,7 @@ public class ByteToImageConvert {
  
             // Write a image byte array into file system
             FileOutputStream imageOutFile;
-            path=MyServletPack.basePath+"\\"+userId+"\\original\\" + name + i + ".png";
+            path=MyServletPack.basePath+"\\"+userId+"\\"+destination+"\\" + name + i + ".png";
         
             imageOutFile = new FileOutputStream(path);
             

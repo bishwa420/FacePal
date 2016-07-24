@@ -5,6 +5,7 @@
  */
 package facepal;
 
+import static facepal.Main.mainContainer;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
@@ -55,9 +56,10 @@ public class SettingsController implements Initializable, ControlledScreen {
 
     @FXML
     private void showAction(ActionEvent e) {
+        mainContainer.loadScreen(Main.screen4ID, Main.screen4file);
         myController.setScreen(Main.screen4ID);
-        ShowPeopleController.trigger.setDisable(false);
-        ShowPeopleController.trigger.fire();
+//        ShowPeopleController.trigger.setDisable(false);
+//        ShowPeopleController.trigger.fire();
     }
 
     @FXML

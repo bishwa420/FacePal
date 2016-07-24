@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -58,7 +59,7 @@ public class CommunicateServer {
     public static Button closeButton;
     static CommunicateServer com;
     static Parent root;
-    
+
     public static URLConnection getConnection() throws MalformedURLException {
         URL urlServlet = new URL("Http://localhost:8259/Linker/MyServletPack");
         try {
@@ -74,7 +75,7 @@ public class CommunicateServer {
     }
 
     public static void operation(Object[] object) {
-           
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -127,36 +128,44 @@ public class CommunicateServer {
         });
 
     }
-    public void load(){
-        try { 
-            root=FXMLLoader.load(getClass().getResource("Loading.fxml"));
+
+    public void load() {
+        try {
+            root = FXMLLoader.load(getClass().getResource("Loading.fxml"));
         } catch (IOException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
     public static void callSendObject(Object[] object) {
 
-            com=new CommunicateServer();
-            closeButton = new Button();
-            Stage newStage = new Stage();
-            closeButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    newStage.close();
-                }
-            });
-            
-            com.load();
-            
-            Scene newScene = new Scene(root);
-            newStage.setScene(newScene);
-            newStage.initStyle(StageStyle.UNDECORATED);
-            newStage.initModality(Modality.APPLICATION_MODAL);
-            operation(object);
-            
-            newStage.showAndWait();
-     
+        com = new CommunicateServer();
+        closeButton = new Button();
+        Stage newStage = new Stage();
+        closeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                newStage.close();
+            }
+        });
+
+        com.load();
+        FadeTransition ft = new FadeTransition(Duration.millis(100), LoadingController.loadingEx);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.3);
+        ft.setCycleCount(10);
+        ft.setAutoReverse(true);
+
+        ft.play();
+
+        Scene newScene = new Scene(root);
+        newStage.setScene(newScene);
+        newStage.initStyle(StageStyle.UNDECORATED);
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        operation(object);
+
+        newStage.showAndWait();
+
     }
 
     public static Object[] getObject() {

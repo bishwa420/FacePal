@@ -81,7 +81,7 @@ public class ScreenController extends StackPane{
          Timeline fade = new Timeline( 
            new KeyFrame(Duration.ZERO, 
                         new KeyValue(opacity,1.0)), 
-           new KeyFrame(new Duration(1000), 
+           new KeyFrame(new Duration(900), 
                 
                new EventHandler<ActionEvent>(){ 
                  @Override
@@ -93,7 +93,7 @@ public class ScreenController extends StackPane{
                    Timeline fadeIn = new Timeline( 
                        new KeyFrame(Duration.ZERO, 
                               new KeyValue(opacity, 0.0)), 
-                       new KeyFrame(new Duration(800), 
+                       new KeyFrame(new Duration(900), 
                               new KeyValue(opacity, 1.0))); 
                    fadeIn.play(); 
                  } 
@@ -108,7 +108,7 @@ public class ScreenController extends StackPane{
          Timeline fadeIn = new Timeline( 
              new KeyFrame(Duration.ZERO, 
                           new KeyValue(opacity, 0.0)), 
-             new KeyFrame(new Duration(2500), 
+             new KeyFrame(new Duration(900), 
                           new KeyValue(opacity, 1.0))); 
          fadeIn.play(); 
        } 
