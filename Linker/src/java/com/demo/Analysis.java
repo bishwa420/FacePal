@@ -52,6 +52,8 @@ public class Analysis {
             
         }
          else if((Integer)receive[0]==6){
+             FaceRecognitionProcess fr=new FaceRecognitionProcess();
+             fr.processing(receive);
             
         }
         else if((Integer)receive[0]==7){

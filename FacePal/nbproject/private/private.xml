@@ -3,20 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/Login.css</file>
+            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/RecoveryPasswordController.java</file>
             <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/HomeController.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/AddPersonController.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/LoadingController.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facedetection/GrayConvertAndResize.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/ReturnData.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facedetection/FaceDetection.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/ImageTobyteConvert.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/ControlledScreen.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/ByteToImageViewConvert.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/loading.jpg</file>
             <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/CommunicateServer.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/ScreenController.java</file>
-            <file>file:/D:/Onedrive/project%20300%20final/FacePal/src/facepal/WelcomeController.java</file>
         </group>
     </open-files>
 </project-private>

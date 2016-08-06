@@ -44,16 +44,16 @@ public class WelcomeController implements Initializable, ControlledScreen {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        logIn=logInPassword;
+        logIn = logInPassword;
 
     }
-    
+
     @FXML
-    public void forgotAction(ActionEvent e){
+    public void forgotAction(ActionEvent e) {
         mainContainer.loadScreen(Main.screen6ID, Main.screen6file);
-        
+
         myController.setScreen(Main.screen6ID);
-        
+
     }
 
     @FXML
@@ -83,44 +83,55 @@ public class WelcomeController implements Initializable, ControlledScreen {
             CommunicateServer.sendObject[3] = signUsername;
             CommunicateServer.sendObject[4] = signPassword;
 
-            CommunicateServer.callSendObject(CommunicateServer.sendObject);
+            CommunicateServer.callSendObject(CommunicateServer.sendObject, false);
             //System.out.println("sadkfjlksadfhaskdjfhsakdjfhsakdjfhsakjdfhskdjfhskdjf");
 
             localReceive = CommunicateServer.getObject();
-           // System.out.println("tumi amar janbsadfkjasldkfn");
-            while(localReceive==null){
+            // System.out.println("tumi amar janbsadfkjasldkfn");
+            while (localReceive == null) {
                 localReceive = CommunicateServer.getObject();
             }
             //System.out.println("ami tumar jshfdkasjdfhksjdfk");
-            try{
-            serviceId = (int) localReceive[0];
-            adminId = (long) localReceive[1];
-            adminName = (String) localReceive[2];
-            success  = (boolean) localReceive[3];
-            
-                System.out.println("service id "+ serviceId+" admin Id "+ adminId+ " success "+success);
+            try {
+                serviceId = (int) localReceive[0];
+                adminId = (long) localReceive[1];
+                adminName = (String) localReceive[2];
+                success = (boolean) localReceive[3];
+                
 
-            if(adminId != 0 && adminName.equals("") == false && success) 
-            {
-                System.out.println(serviceId +"  "+ adminId +"  "+ adminName+ " " + success);
-                DialogFX dialog = new DialogFX();
-                dialog.setTitleText("Info");
-                dialog.setMessage("Successfully registered.");
-                dialog.showDialog();
-                loadFile();
-              // change scene to home page
-                  myController.setScreen(Main.screen2ID);
+                System.out.println("service id " + serviceId + " admin Id " + adminId + " success " + success);
 
-            }
-            if(success==false){
-                 DialogFX dialog = new DialogFX(DialogFX.Type.ERROR);
-                 dialog.setTitleText("Error");
-                  dialog.setMessage("signUp Failed");
-                  dialog.showDialog();
+                if (adminId != 0 && adminName.equals("") == false && success) {
+                    System.out.println(serviceId + "  " + adminId + "  " + adminName + " " + success);
+                    DialogFX dialog = new DialogFX();
+                    dialog.setTitleText("Info");
+                    dialog.setMessage("Successfully registered.");
+                    dialog.showDialog();
+                    loadFile();
+                    
+                    
+                    resetSignupField();
+
+                    // change scene to home page
+                    myController.setScreen(Main.screen2ID);
+
+                }
+                if (success == false) {
+                    DialogFX dialog = new DialogFX(DialogFX.Type.ERROR);
+                    dialog.setTitleText("Error");
+                    if((boolean) localReceive[5]==true){
+                        dialog.setMessage("Signup Failed. \nEmail aready exists.");
+                    }
+                    else if((boolean) localReceive[4]==true){
+                    dialog.setMessage("Signup Failed. \nUsernmae aready exists.");
+                    }else{
+                         dialog.setMessage("Signup Failed");
+                    }
+                    dialog.showDialog();
                   //signUpPassword.setText("");
-                  
-            }
-            }catch(Exception ex){
+
+                }
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
@@ -135,27 +146,30 @@ public class WelcomeController implements Initializable, ControlledScreen {
             InternetAddress emailAddr = new InternetAddress(email);
             emailAddr.validate();
         } catch (AddressException ex) {
-           // ex.printStackTrace();
+            // ex.printStackTrace();
             result = false;
         }
         return result;
     }
-    
-    public void loadFile(){
-         mainContainer.loadScreen(Main.screen2ID, Main.screen2file);
-         mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
-         
-         mainContainer.loadScreen(Main.screen5ID, Main.screen5file);
+
+    public void loadFile() {
+        mainContainer.loadScreen(Main.screen2ID, Main.screen2file);
+        mainContainer.loadScreen(Main.screen3ID, Main.screen3file);
+
+        mainContainer.loadScreen(Main.screen5ID, Main.screen5file);
+    }
+    void resetSignupField(){
+         signUpName.setText("");
+        signUpEmail.setText("");
+        signUpUsername.setText("");
+        signUpPassword.setText("");
+        signUpConfirmPassword.setText("");
     }
 
     @FXML
     public void resetAction(ActionEvent e) {
 
-        signUpName.setText("");
-        signUpEmail.setText("");
-        signUpUsername.setText("");
-        signUpPassword.setText("");
-        signUpConfirmPassword.setText("");
+       resetSignupField();
     }
 
     @FXML
@@ -165,42 +179,35 @@ public class WelcomeController implements Initializable, ControlledScreen {
         logPassword = logInPassword.getText();
 
         if (!logUsername.isEmpty() && !logPassword.isEmpty()) {
-            
-            CommunicateServer.sendObject =new Object[3];
-            
-            CommunicateServer.sendObject[0]=1;
-            CommunicateServer.sendObject[1]=logUsername;
-            CommunicateServer.sendObject[2]=logPassword;
-           
-       
-            CommunicateServer.callSendObject(CommunicateServer.sendObject);
-            
-         
-            
-            localReceive=CommunicateServer.getObject();
-            
+
+            CommunicateServer.sendObject = new Object[3];
+
+            CommunicateServer.sendObject[0] = 1;
+            CommunicateServer.sendObject[1] = logUsername;
+            CommunicateServer.sendObject[2] = logPassword;
+
+            CommunicateServer.callSendObject(CommunicateServer.sendObject, false);
+
+            localReceive = CommunicateServer.getObject();
+
             serviceId = (int) localReceive[0];
             boolean access = (boolean) localReceive[1];
-            
-            
-            if(access==true && serviceId==1){
-                
-                 adminId = (long) localReceive[2];
-                 adminName = (String) localReceive[3]; 
-                 loadFile();
-                 myController.setScreen(Main.screen2ID);
+
+            if (access == true && serviceId == 1) {
+
+                adminId = (long) localReceive[2];
+                adminName = (String) localReceive[3];
+                loadFile();
+                myController.setScreen(Main.screen2ID);
                  //scene change to home 
-                
+
+            } else {
+                DialogFX dialog = new DialogFX(DialogFX.Type.ERROR);
+                dialog.setTitleText("Error");
+                dialog.setMessage("LogIn Failed");
+                dialog.showDialog();
+                logInPassword.setText("");
             }
-            else{
-                 DialogFX dialog = new DialogFX(DialogFX.Type.ERROR);
-                 dialog.setTitleText("Error");
-                  dialog.setMessage("LogIn Failed");
-                  dialog.showDialog();
-                  logInPassword.setText("");
-            }
-            
-            
 
         } else {
             logInUsername.setText("");
@@ -208,7 +215,6 @@ public class WelcomeController implements Initializable, ControlledScreen {
         }
 
     }
-
 
     @Override
     public void setScreenParent(ScreenController screenPage) {

@@ -16,11 +16,12 @@ import javax.imageio.ImageIO;
 
 public class JavaFaces {
 
-    public static String trainingImagePath = "E:\\Google Drive\\FacePal\\Server\\JavaFaces\\trainingImages";
-    public static String eigenCachePath = "C:\\Users\\bishw\\Desktop\\New folder";
+    public static String trainingImagePath = null;//;"E:\\Google Drive\\FacePal\\Server\\JavaFaces\\trainingImages";
+    public static String eigenCachePath =null;
     public static int numberOfFaces = 0;
     public static double matchDistance;
     public static String matchedName;
+    public static long fileNo;
 
     public static void build(int numEFs) // create a FaceBundle for the specified number of eigenfaces, and store it
     {
@@ -229,10 +230,15 @@ public class JavaFaces {
         //eigenCachePath = eigenPath;
         //eigenCachePath = "E:\\Study\\code\\Linker\\eigenpaths";
         //trainingImagePath = "E:\\Study\\code\\Linker\\images";
+        
+        
         System.out.println("jar file, training path is: " + trainingImagePath);
         System.out.println("jar file, eigen path is: " + eigenCachePath);
 
         int numEFs = 0;
+        
+        System.out.println("training image path is now: " + trainingImagePath);
+        System.out.println("eigenCache path is now: " + eigenCachePath);
 
         long startTime = System.currentTimeMillis();
         System.out.println("before build eigenfaces call");
@@ -259,8 +265,26 @@ public class JavaFaces {
     
     public static boolean recognize(BufferedImage img){
         FaceRecognition newFace = new FaceRecognition();
+        System.out.println("server, recognizing image, eigen cache path is: " + JavaFaces.eigenCachePath);
         MatchResult result = newFace.match(img);
-        if(matchDistance / numberOfFaces <= 0.5)
+        
+        /*
+        String[] array = matchedName.split("\\");
+        String temporaryName = array[ array.length - 1 ].substring(0,array[ array.length - 1 ].length()-4);
+        System.out.println("temporaryName: " + temporaryName);
+        */
+        
+        fileNo = 0;
+        for(int i = matchedName.length() - 5, p = 1; ; i--, p*=10){
+            if(matchedName.charAt(i) == '\\')
+                break;
+            System.out.println("matched character at i: " + matchedName.charAt(i) + " value is: " + (matchedName.charAt(i) - '0'));
+            fileNo += p*(matchedName.charAt(i) - '0');
+        }
+        
+        System.out.println("fileNo is: " + fileNo);
+        
+        if(matchDistance / numberOfFaces <= 0.043)
             return true;
         return false;
     }

@@ -7,4 +7,4 @@
 ->   org.codebytec jar file are in javacv-1.1-bin bytec folder  
 
 
--->  openCv version 2.4.13
+-->  openCv version 3.0.1

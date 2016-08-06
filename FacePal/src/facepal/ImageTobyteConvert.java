@@ -30,27 +30,27 @@ import javax.imageio.ImageIO;
  */
 public class ImageTobyteConvert {
 
-    public String convertimage(String path) {
+    public String convertimage(BufferedImage img) {
 
-        File file = new File(path);
+//        File file = new File(path);
 //        System.out.println(file.getPath());
 //        String mimetype = new MimetypesFileTypeMap().getContentType(file);
 //        String type = mimetype.split("/")[0];
 //           System.out.println(type);
 //        if (type.equals("image")) {
         //  System.out.println("It's an image");
-        System.out.println(file.getPath());
+//        System.out.println(file.getPath());
         String imageDataString = null;
 
         // Reading a Image file from file system
-        FileInputStream imageInFile;
+//        FileInputStream imageInFile;
         try {
             //Resizing image 
 
-            imageInFile = new FileInputStream(file);
-            Image image = ImageIO.read(imageInFile);
+//            imageInFile = new FileInputStream(file);
+//            Image image = ImageIO.read(imageInFile);
             //resize with (X*Y) ratio
-            BufferedImage bi = this.createResizedCopy(image, 160, 120, true);
+            BufferedImage bi = this.createResizedCopy(img, 160, 120, true);
 
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             ImageIO.write(bi, "png", os);
@@ -64,7 +64,7 @@ public class ImageTobyteConvert {
 
             // Converting Image byte array into Base64 String
             imageDataString = encodeImage(imageData);
-            imageInFile.close();
+           // imageInFile.close();
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImageTobyteConvert.class.getName()).log(Level.SEVERE, null, ex);

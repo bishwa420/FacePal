@@ -22,9 +22,10 @@ public class EmailConfiguration {
         
         this.message="<!DOCTYPE html><body> <div style=\"color:blue;\"><h1> Security code</h1> </div>"
             + "                           <div><p style=\"font-size:14px;\">Please use the following security code for "
-            + "                            recovering password of the FacePal account</p><br><p style=\"font-size:22px;\">"
+            + "                            recovering password of  your FacePal account. If you did not request for recovering password \n"
+            + "                            simply ignore this e-mail.</p><br><p style=\"font-size:22px;\">"
             + "                            Security code: " + pinCode + "</p><br><p style=\"font-size:14px;\">Thanks,<br>The "
-            + "                            FacePal account team</p></div></body>";
+            + "                            FacePal team</p></div></body>";
         
         return this.message;
         

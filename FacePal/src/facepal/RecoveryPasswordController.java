@@ -62,7 +62,7 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
             CommunicateServer.sendObject[0] = 7;
             CommunicateServer.sendObject[1] = email;
             
-            CommunicateServer.callSendObject(CommunicateServer.sendObject);
+            CommunicateServer.callSendObject(CommunicateServer.sendObject,false);
 
             Object[] receive = CommunicateServer.getObject();
             if ((Integer) receive[0] == 7 && (boolean) receive[1] == true) {
@@ -71,7 +71,7 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
                 backupEmail = email;
                 DialogFX dialog = new DialogFX();
                 dialog.setTitleText("Info");
-                dialog.setMessage("Successfully Send.");
+                dialog.setMessage("Please check your mailbox.");
                 dialog.showDialog();
                 
                 if(bind==false){
@@ -124,7 +124,7 @@ public class RecoveryPasswordController implements Initializable, ControlledScre
             CommunicateServer.sendObject[1] = backupEmail;
             CommunicateServer.sendObject[2] = a;
 
-            CommunicateServer.callSendObject(CommunicateServer.sendObject);
+            CommunicateServer.callSendObject(CommunicateServer.sendObject,false);
 
             Object[] receive = CommunicateServer.getObject();
 

@@ -108,7 +108,7 @@ public class SettingsController implements Initializable, ControlledScreen {
         CommunicateServer.sendObject[4] = cPassword;
         CommunicateServer.sendObject[5] = updatedNewPassword;
 
-        CommunicateServer.callSendObject(CommunicateServer.sendObject);
+        CommunicateServer.callSendObject(CommunicateServer.sendObject,false);
 
         localReceive = CommunicateServer.getObject();
         System.out.println("etotuk pariochi");

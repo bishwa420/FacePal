@@ -26,7 +26,9 @@ public class Register {
     private Connection con = null;
     private static long adminId;
     private boolean success = true;
+    private boolean duplicate=false; 
     DatabaseConnection db = new DatabaseConnection();
+    private boolean emailFound=false;
 
     public void register(Object[] receive) {
 
@@ -34,28 +36,50 @@ public class Register {
         email = (String) receive[2];
         userName = (String) receive[3];
         password = (String) receive[4];
+        int check=0;
 
         try {
 
             //upadating data to login and info table and create root folder for Admin
             con = db.setupConnection();
+            
+            String q = "select log_id " + "from info where Email='" + email + "'";
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery(q);
+             emailFound=false;
+             
+            while (result.next()) {
+                
+                emailFound=true;
+                throw new NullPointerException();
+            }
+            stmt.close();
+            
+            
+            
             System.out.println("database connected tapos ");
             String query = "Insert into LOGIN (username,password) values (?,?)";
 
             strt = con.prepareStatement(query);
             strt.setString(1, userName);
             strt.setString(2, password);
-
+           
+            duplicate=false;
             System.out.println("database connected datta ");
-            int check = strt.executeUpdate();
+            
+           
+             check = strt.executeUpdate();
+          
+                
+            
             if (check == 1) {
                 System.out.println("database connected 2");
             }
 
             //get user id 
             query = "select log_id " + "from login where username='" + userName + "' and password='" + password + "'";
-            Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery(query);
+             stmt = con.createStatement();
+             result = stmt.executeQuery(query);
 
             while (result.next()) {
                 adminId = result.getLong("log_id");
@@ -69,24 +93,27 @@ public class Register {
 
             strt = con.prepareStatement(query);
             strt.setLong(1, adminId);
-            strt.setString(2, password);
+            strt.setString(2, name);
             strt.setString(3, email);
             System.out.println("database connected");
-
-            check = strt.executeUpdate();
-            if (check == 1) {
+            
+           
+            int check1 = strt.executeUpdate();
+            if (check1 == 1) {
                 System.out.println("database connected 2");
             }
 
             strt.close();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
             success = false;
+            if(check==0)
+                duplicate=true;
             System.out.println("database not connected 1");
         }
 
-        MyServletPack.responsedObject = new Object[5];
+        MyServletPack.responsedObject = new Object[6];
         MyServletPack.responsedObject[0] = 0;
         MyServletPack.responsedObject[1] = adminId;
         MyServletPack.responsedObject[2] = name;
@@ -95,6 +122,19 @@ public class Register {
 
         } else {
             MyServletPack.responsedObject[3] = false;
+        }
+        
+        if(duplicate==true){
+            MyServletPack.responsedObject[4]=true;
+        }
+        else{
+            MyServletPack.responsedObject[4]=false;
+        }
+        if(emailFound==true){
+            MyServletPack.responsedObject[5]=true;
+        }
+        else{
+            MyServletPack.responsedObject[5]=false;
         }
 
     }

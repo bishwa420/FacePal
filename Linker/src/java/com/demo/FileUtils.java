@@ -15,9 +15,11 @@ public class FileUtils {
     private static final String FILE_EXT = ".png";
 
   //private static final String TRAINING_DIR = "‪‪E:\\Google Drive\\Project 300\\TrainingImages";
-    private static  String TRAINING_DIR = "E:\\Google Drive\\FacePal\\Server\\JavaFaces\\trainingImages";
+//    private static  String TRAINING_DIR = "E:\\Google Drive\\FacePal\\Server\\JavaFaces\\trainingImages";
+    private static  String TRAINING_DIR = JavaFaces.trainingImagePath;
 
-    private static String EF_CACHE = "\\eigen.cache";
+//    private static String EF_CACHE = "\\eigen.cache";
+    private static String EF_CACHE = JavaFaces.eigenCachePath;
 
     private static final String EIGENFACES_DIR = "eigenfaces";
     private static final String EIGENFACES_PREFIX = "eigen_";
@@ -31,7 +33,7 @@ public class FileUtils {
     {
         System.out.println("papi chulo in file utils, line 36");
         TRAINING_DIR = JavaFaces.trainingImagePath;
-        EF_CACHE = JavaFaces.eigenCachePath + EF_CACHE;
+        EF_CACHE = JavaFaces.eigenCachePath;// + EF_CACHE;
         File dirF = new File(TRAINING_DIR);
         String[] fnms = dirF.list(new FilenameFilter() {
             public boolean accept(File f, String name) {
@@ -108,6 +110,7 @@ public class FileUtils {
   // ------------------ FaceBundle I/O --------------------------
     public static FaceBundle readCache() // read the FaceBundle object from a file called EF_CACHE
     {
+        EF_CACHE = JavaFaces.eigenCachePath;
         FaceBundle bundle = null;
         try {
             ObjectInputStream ois = new ObjectInputStream(

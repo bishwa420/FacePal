@@ -53,8 +53,9 @@ import javafx.util.Duration;
  */
 public class CommunicateServer {
 
+    private static long timeout = 0;
     public static Object[] sendObject;
-    private static Object[] receivedObject;
+    private static Object[]  receivedObject;
     private static boolean flag = false;
     public static Button closeButton;
     static CommunicateServer com;
@@ -74,14 +75,15 @@ public class CommunicateServer {
         return null;
     }
 
-    public static void operation(Object[] object) {
+    public static void operation(Object[] object, boolean fromWebcam) {
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(1500);
+                    //Thread.sleep(1500);
                     flag = false;
+                    timeout = System.currentTimeMillis();
                     URLConnection con = getConnection();
                     //send data to servlet
                     OutputStream outstream = con.getOutputStream();
@@ -106,22 +108,22 @@ public class CommunicateServer {
 //                       
 
                     receivedObject = (Object[]) result;
-                    System.out.println(receivedObject.length);
+                    System.out.println("length of result from server " + receivedObject.length);
                     inputFromServlet.close();
                     instr.close();
-                    if (flag == true) {
+
+                    if (flag == true && fromWebcam == false) {
                         closeButton.fire();
                     }
                     //show result
                     System.out.println("complete");
-                } catch (MalformedURLException ex) {
+                } catch (Exception ex) {
+                    while (System.currentTimeMillis() < (timeout + 20000));
+                    if (fromWebcam == false) {
+                        closeButton.fire();
+                    }
                     Logger.getLogger(CommunicateServer.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(CommunicateServer.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CommunicateServer.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CommunicateServer.class.getName()).log(Level.SEVERE, null, ex);
+
                 }
 
             }
@@ -134,43 +136,51 @@ public class CommunicateServer {
             root = FXMLLoader.load(getClass().getResource("Loading.fxml"));
         } catch (IOException ex) {
             ex.printStackTrace();
+
         }
     }
 
-    public static void callSendObject(Object[] object) {
+    public static void callSendObject(Object[] object, boolean fromWebcam) {
 
-        com = new CommunicateServer();
-        closeButton = new Button();
-        Stage newStage = new Stage();
-        closeButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                newStage.close();
-            }
-        });
+        if (fromWebcam == true) {
+            operation(object, true);
+        } else {
 
-        com.load();
-        FadeTransition ft = new FadeTransition(Duration.millis(100), LoadingController.loadingEx);
-        ft.setFromValue(1.0);
-        ft.setToValue(0.3);
-        ft.setCycleCount(10);
-        ft.setAutoReverse(true);
+            com = new CommunicateServer();
+            closeButton = new Button();
+            Stage newStage = new Stage();
+            closeButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    newStage.close();
+                }
+            });
 
-        ft.play();
+            com.load();
+            FadeTransition ft = new FadeTransition(Duration.millis(100), LoadingController.loadingEx);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.3);
+            ft.setCycleCount(10);
+            ft.setAutoReverse(true);
 
-        Scene newScene = new Scene(root);
-        newStage.setScene(newScene);
-        newStage.initStyle(StageStyle.UNDECORATED);
-        newStage.initModality(Modality.APPLICATION_MODAL);
-        operation(object);
+            ft.play();
 
-        newStage.showAndWait();
+            Scene newScene = new Scene(root);
+            newStage.setScene(newScene);
+            newStage.initStyle(StageStyle.UNDECORATED);
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            operation(object, false);
+
+            newStage.showAndWait();
+        }
 
     }
 
     public static Object[] getObject() {
-
-        return receivedObject;
+        Object[] returnObject = receivedObject;
+        receivedObject = null;
+        return returnObject;
+       // return receivedObject;
     }
 
 }

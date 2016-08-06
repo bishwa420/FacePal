@@ -107,17 +107,24 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
         // File f = new File("C:\\Users\\Tapos\\Pictures\\Tapos.png");
          //image1 = conversion.convertimage(f.getPath());
         
+        
+        getDataFromServer();
+        
+       
+        
+    }
+    
+    public void getDataFromServer(){
+        
         CommunicateServer.sendObject = new Object[2];
 
         CommunicateServer.sendObject[0] = 3;
         CommunicateServer.sendObject[1] = WelcomeController.adminId;
 
-       CommunicateServer.callSendObject(CommunicateServer.sendObject);
+       CommunicateServer.callSendObject(CommunicateServer.sendObject,false);
 
         localReceive = CommunicateServer.getObject();
-        
-        
-        System.out.println("etotuk paiche");
+         System.out.println("etotuk paiche");
 
          parseUserList(localReceive);
          System.out.println("etotuk paiche hi hi hi ");
@@ -162,6 +169,7 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
     }
 
     private void delete() {
+        System.out.println("delete korte pare na kene ");
 
         CommunicateServer.sendObject = new Object[size + 2];
         CommunicateServer.sendObject[0] = 4;
@@ -174,9 +182,11 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
             k++;
         }
 
-        CommunicateServer.callSendObject(CommunicateServer.sendObject);
+        CommunicateServer.callSendObject(CommunicateServer.sendObject,false);
 
         localReceive = CommunicateServer.getObject();
+        
+        System.out.println(localReceive[0] +"  "+ localReceive[1] +" "+ localReceive[2]);
 
         if ((Integer) localReceive[0] == 4 && (long) localReceive[1] == WelcomeController.adminId && (boolean) localReceive[2] == true) {
 
@@ -187,12 +197,10 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
 
             for (Iterator<Information> it = list.iterator(); it.hasNext();) {
                 Information element = it.next();
-
-                if (element.isSelect() == false) {
                     it.remove();
-                }
+                
             }
-            initializeTable();
+            getDataFromServer();
         }
 
     }
@@ -234,6 +242,7 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
             }
         }
         myController.setScreen(Main.screen4ID);
+        //getDataFromServer();
         ShowPeopleController.trigger.fire();
         
     }
@@ -310,6 +319,8 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
         // parse and construct User datamodel list by looping your ResultSet rs
         // and return the list 
         
+        System.out.println(local[0] +"  "+ local[1] + " " + local[2]+" ");
+        
         if ((Integer) local[0] == 3 && (long) local[1] == WelcomeController.adminId && (boolean) local[2]==true) {
 
             int track = 2;
@@ -325,6 +336,8 @@ public class ShowPeopleController implements Initializable, ControlledScreen {
                 box.setMaxSize(10, 10);
 
                 long id = (long) local[i];
+                
+                System.out.println("person id "+i + "is "+ id);
 
                 String name = (String) local[i + 1];
                 Label label = new Label(name);

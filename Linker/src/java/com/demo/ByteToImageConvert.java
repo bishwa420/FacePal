@@ -28,7 +28,7 @@ public class ByteToImageConvert {
  
             // Write a image byte array into file system
             FileOutputStream imageOutFile;
-            path=MyServletPack.basePath+"\\"+userId+"\\"+destination+"\\" + name + i + ".png";
+            path=MyServletPack.basePath+"\\"+userId+"\\"+destination+"\\" + name  + ".png";
         
             imageOutFile = new FileOutputStream(path);
             

@@ -5,28 +5,44 @@
  */
 package facepal;
 
-import facedetection.*;
+import Detection.HaarFaceDetector;
+//import facedetection.*;
 import static facepal.Main.mainContainer;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import net.coobird.thumbnailator.Thumbnails;
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_imgcodecs;
 import org.thehecklers.dialogfx.DialogFX;
 import org.thehecklers.dialogfx.DialogFX.Type;
+import net.sf.image4j.util.ConvertUtil;
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Rotation;
 
 /**
  * FXML Controller class
@@ -63,6 +79,9 @@ public class AddPersonController implements Initializable, ControlledScreen {
     public String enhance3 = "";
     public String enhance4 = "";
     public String enhance5 = "";
+    private BufferedImage image;
+    private String  originalImageFile;
+    private BufferedImage[] imagebuf=new BufferedImage[2];
 
     ImageTobyteConvert imgToByte;
 
@@ -82,12 +101,14 @@ public class AddPersonController implements Initializable, ControlledScreen {
             } else {
 
                 fullPath1 = file.getCanonicalPath();
-                image1 = imgToByte.convertimage(fullPath1);
+               // image1 = imgToByte.convertimage(fullPath1);
                 path1.setText(fullPath1);
-                BufferedImage imagebuf = ImageIO.read(new File(fullPath1));
+                imagebuf[0] = ImageIO.read(new File(fullPath1));
+                 imagebuf[1] = Scalr.rotate(imagebuf[0], Rotation.CW_90);
 
                 if (faceDetect(imagebuf) == true) {
-                    enhance1 = imgToByte.convertString(FaceDetection.IplImageToBufferedImage(iplImg[0]));
+                    enhance1 = imgToByte.convertString(image);
+                    image1=originalImageFile;
                 } else {
                     DialogFX dialog = new DialogFX(Type.ERROR);
                     dialog.setTitleText("Error");
@@ -119,12 +140,14 @@ public class AddPersonController implements Initializable, ControlledScreen {
             } else {
 
                 fullPath2 = file.getCanonicalPath();
-                image2 = imgToByte.convertimage(fullPath2);
+                //image2 = imgToByte.convertimage(fullPath2);
                 path2.setText(fullPath2);
-                BufferedImage imagebuf = ImageIO.read(new File(fullPath2));
+                imagebuf[0] = ImageIO.read(new File(fullPath2));
+                 imagebuf[1] = Scalr.rotate(imagebuf[0], Rotation.CW_90);
 
                 if (faceDetect(imagebuf) == true) {
-                    enhance2 = imgToByte.convertString(FaceDetection.IplImageToBufferedImage(iplImg[0]));
+                    enhance2 = imgToByte.convertString(image);
+                    image2=originalImageFile;
                 } else {
                     DialogFX dialog = new DialogFX(Type.ERROR);
                     dialog.setTitleText("Error");
@@ -155,12 +178,14 @@ public class AddPersonController implements Initializable, ControlledScreen {
             } else {
 
                 fullPath3 = file.getCanonicalPath();
-                image3 = imgToByte.convertimage(fullPath3);
+                //image3 = imgToByte.convertimage(fullPath3);
                 path3.setText(fullPath3);
-                BufferedImage imagebuf = ImageIO.read(new File(fullPath3));
+                imagebuf[0] = ImageIO.read(new File(fullPath3));
+                 imagebuf[1] = Scalr.rotate(imagebuf[0], Rotation.CW_90);
 
                 if (faceDetect(imagebuf) == true) {
-                    enhance3 = imgToByte.convertString(FaceDetection.IplImageToBufferedImage(iplImg[0]));
+                    enhance3 = imgToByte.convertString(image);
+                    image3=originalImageFile;
                 } else {
                     DialogFX dialog = new DialogFX(Type.ERROR);
                     dialog.setTitleText("Error");
@@ -190,13 +215,15 @@ public class AddPersonController implements Initializable, ControlledScreen {
             } else {
 
                 fullPath4 = file.getCanonicalPath();
-                image4 = imgToByte.convertimage(fullPath4);
+                //image4 = imgToByte.convertimage(fullPath4);
 
                 path4.setText(fullPath4);
-                BufferedImage imagebuf = ImageIO.read(new File(fullPath4));
+                 imagebuf[0] = ImageIO.read(new File(fullPath4));
+                 imagebuf[1] = Scalr.rotate(imagebuf[0], Rotation.CW_90);
 
                 if (faceDetect(imagebuf) == true) {
-                    enhance4 = imgToByte.convertString(FaceDetection.IplImageToBufferedImage(iplImg[0]));
+                    enhance4 = imgToByte.convertString(image);
+                    image4=originalImageFile;
                 } else {
                     DialogFX dialog = new DialogFX(Type.ERROR);
                     dialog.setTitleText("Error");
@@ -228,12 +255,18 @@ public class AddPersonController implements Initializable, ControlledScreen {
                 fullPath5 = file.getCanonicalPath();
 
                 path5.setText(fullPath5);
-                image5 = imgToByte.convertimage(fullPath5);
+                //image5 = imgToByte.convertimage(fullPath5);
 
-                BufferedImage imagebuf = ImageIO.read(new File(fullPath5));
+                 imagebuf[0] = ImageIO.read(new File(fullPath5));
+                 imagebuf[1] = Scalr.rotate(imagebuf[0], Rotation.CW_90);
+                
+//                  ImageIO.write(imagebuf[0], "png", new File("F:\\temp"+5+".png"));
+//                   ImageIO.write(imagebuf[1], "png", new File("F:\\temp"+6+".png"));
+//              //  System.out.println("width = "+ imagebuf.getWidth() + " height= "+ imagebuf.getHeight());
 
                 if (faceDetect(imagebuf) == true) {
-                    enhance5 = imgToByte.convertString(FaceDetection.IplImageToBufferedImage(iplImg[0]));
+                    enhance5 = imgToByte.convertString(image);
+                    image5= originalImageFile;
                 } else {
                     DialogFX dialog = new DialogFX(Type.ERROR);
                     dialog.setTitleText("Error");
@@ -244,20 +277,7 @@ public class AddPersonController implements Initializable, ControlledScreen {
                     image5 = "";
                     enhance5 = "";
                 }
-//                FaceDetection fd = new FaceDetection(0);
-//                try{
-//                   iplImg =fd.detectFace(imagebuf);
-//                    
-//                } catch(Exception ex){
-//                    if(ex.equals("No"))
-//                        System.out.println("No face in the photo");
-//                    else if(ex.equals("Multiple")){
-//                        System.out.println("Multiple faces.");
-//                    }
-//                }
-                //  enhance5 = imgToByte.convertString(FaceDetection.IplImageToBufferedImage(iplImg));
-
-                //IplImage iplImage = facesOnly.facesOnly();
+     
             }
 
         } catch (Exception ex) {
@@ -266,33 +286,60 @@ public class AddPersonController implements Initializable, ControlledScreen {
 
     }
 
-    public boolean faceDetect(BufferedImage imagebuf) {
-        
-       
-        FaceDetection fd = new FaceDetection(0);
+    void processingImage(ArrayList<Image> list) {
+
+        image = null;
+        int k=1;
+        for (Image faces : list) {
+            BufferedImage bImage = SwingFXUtils.fromFXImage(faces, null);
+
+            BufferedImage gray = Detection.Conversion.createResizedCopy(bImage, 125, 150, true);
+            image = gray;
+//            try {
+//                ImageIO.write(gray, "png", new File("F:\\output"+k+++".png"));
+//
+//                //  opencv_imgcodecs.cvSaveImage("birrhis sdf sdf"  + ".jpg", ip);
+//            } catch (Exception ex) {
+//
+//            }
+        }
+
+    }
+
+    public boolean faceDetect(BufferedImage[] imagebuf) {
+        isFace=false;
+        originalImageFile=null;
+        HaarFaceDetector hf = new HaarFaceDetector();
         try {
-            iplImg = fd.detectFace(imagebuf);
-            if (iplImg.length == 1) {
+            int i=0;
+            while(isFace!=true && i<2){
+                
+            System.out.println("Call method");
+            ArrayList<Image> arrayOfImage = hf.HaarFaceDetectorPart(imagebuf[i],2);
+
+            System.out.println("face found " + arrayOfImage.size());
+
+            if (arrayOfImage.size() == 1) {
+                originalImageFile=imgToByte.convertimage(imagebuf[i]);
+                processingImage(arrayOfImage);
                 isFace = true;
+            }
+            i++;
             }
 
         } catch (Exception ex) {
-            if (ex.equals("No")) {
-
-                isFace = false;
-                System.out.println("No face in the photo");
-            } else if (ex.equals("Multiple")) {
-                isFace = false;
-
-                System.out.println("Multiple faces.");
-            }
+            ex.printStackTrace();
+//            if (ex.equals("No")) {
+//
+//                isFace = false;
+//                System.out.println("No face in the photo");
+//            } else if (ex.equals("Multiple")) {
+//                isFace = false;
+//
+//                System.out.println("Multiple faces.");
+//            }
         }
         return isFace;
-   
-                
-       
-                
-                
     }
 
     @FXML
@@ -321,7 +368,7 @@ public class AddPersonController implements Initializable, ControlledScreen {
             CommunicateServer.sendObject[11] = enhance4;
             CommunicateServer.sendObject[12] = enhance5;
 
-            CommunicateServer.callSendObject(CommunicateServer.sendObject);
+            CommunicateServer.callSendObject(CommunicateServer.sendObject,false);
 
             localReceive = CommunicateServer.getObject();
 
@@ -410,5 +457,9 @@ public class AddPersonController implements Initializable, ControlledScreen {
         personName.setText("");
         imgToByte = new ImageTobyteConvert();
     }
+    
+    
+    
+    
 
 }
