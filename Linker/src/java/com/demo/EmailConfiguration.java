@@ -12,7 +12,7 @@ package com.demo;
 public class EmailConfiguration {
 
     public final String from = "EmailAddress";
-    public final String username = "username";
+    public final String username = "username ";
     public final String password = "Password";
     public  String message ="";
     public final String subject = "FacePal Account";
